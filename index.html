@@ -30,8 +30,6 @@
       color: #007b5e;
       margin-top: 0;
     }
-
-    /* হেডার */
     header {
       background-color: #007b5e;
       padding: 20px 10px;
@@ -42,8 +40,6 @@
       letter-spacing: 2px;
       box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     }
-
-    /* মেইন কনটেন্ট */
     main {
       max-width: 1100px;
       margin: 40px auto;
@@ -56,15 +52,11 @@
       text-transform: uppercase;
       letter-spacing: 1.5px;
     }
-
-    /* টিম কার্ড গ্রিড */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
       gap: 25px;
     }
-
-    /* কার্ড স্টাইল */
     .card {
       background: #fff;
       border-radius: 12px;
@@ -77,8 +69,6 @@
       transform: translateY(-8px);
       box-shadow: 0 12px 25px rgba(0,0,0,0.15);
     }
-
-    /* ছবি */
     .card img {
       width: 110px;
       height: 110px;
@@ -87,8 +77,6 @@
       margin-bottom: 15px;
       border: 3px solid #007b5e;
     }
-
-    /* তথ্য তালিকা */
     .info-list {
       text-align: left;
       color: #555555;
@@ -110,8 +98,6 @@
       display: inline-block;
       font-weight: 600;
     }
-
-    /* ফুটার */
     footer {
       background-color: #007b5e;
       color: white;
@@ -143,50 +129,7 @@
 
 <main>
   <h2>আমাদের টিম মেম্বারগণ</h2>
-  
-  <div class="team-grid">
-    <!-- মেম্বার ১ -->
-    <div class="card">
-      <img src="https://via.placeholder.com/110" alt="সদস্যের ছবি" />
-      <ul class="info-list">
-        <li><strong>নাম:</strong> জন ডো</li>
-        <li><strong>পিতার নাম:</strong> রাহুল ডো</li>
-        <li><strong>মাতার নাম:</strong> সুমা ডো</li>
-        <li><strong>এনআইডি নং:</strong> 1234567890</li>
-        <li><strong>মোবাইল:</strong> 017XXXXXXXX</li>
-        <li><strong>ঠিকানা:</strong> ঢাকা, বাংলাদেশ</li>
-        <li><strong>সদস্য নং:</strong> 001</li>
-      </ul>
-    </div>
-
-    <!-- মেম্বার ২ -->
-    <div class="card">
-      <img src="https://via.placeholder.com/110" alt="সদস্যের ছবি" />
-      <ul class="info-list">
-        <li><strong>নাম:</strong> সুমন রহমান</li>
-        <li><strong>পিতার নাম:</strong> আলমগীর রহমান</li>
-        <li><strong>মাতার নাম:</strong> সালমা রহমান</li>
-        <li><strong>এনআইডি নং:</strong> 0987654321</li>
-        <li><strong>মোবাইল:</strong> 018XXXXXXXX</li>
-        <li><strong>ঠিকানা:</strong> চট্টগ্রাম, বাংলাদেশ</li>
-        <li><strong>সদস্য নং:</strong> 002</li>
-      </ul>
-    </div>
-
-    <!-- মেম্বার ৩ -->
-    <div class="card">
-      <img src="https://via.placeholder.com/110" alt="সদস্যের ছবি" />
-      <ul class="info-list">
-        <li><strong>নাম:</strong> রিনা আক্তার</li>
-        <li><strong>পিতার নাম:</strong> মোজাম্মেল হক</li>
-        <li><strong>মাতার নাম:</strong> শারমিন আক্তার</li>
-        <li><strong>এনআইডি নং:</strong> 1122334455</li>
-        <li><strong>মোবাইল:</strong> 019XXXXXXXX</li>
-        <li><strong>ঠিকানা:</strong> রাজশাহী, বাংলাদেশ</li>
-        <li><strong>সদস্য নং:</strong> 003</li>
-      </ul>
-    </div>
-  </div>
+  <div class="team-grid"></div>
 </main>
 
 <footer>
@@ -196,6 +139,73 @@
     <a href="#top">পেজের শুরুতে যান</a> | <a href="admin.html">এডমিন প্যানেল</a>
   </p>
 </footer>
+
+<script>
+  // LocalStorage থেকে মেম্বার ডেটা নেওয়া
+  const teamMembers = JSON.parse(localStorage.getItem('teamMembers')) || [];
+
+  const teamGrid = document.querySelector('.team-grid');
+
+  // ফাংশন: কার্ড তৈরী ও যোগ করা
+  function addMemberCard(member) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${member.photo || 'https://via.placeholder.com/110'}" alt="সদস্যের ছবি" />
+      <ul class="info-list">
+        <li><strong>নাম:</strong> ${member.name}</li>
+        <li><strong>পিতার নাম:</strong> ${member.fatherName}</li>
+        <li><strong>মাতার নাম:</strong> ${member.motherName}</li>
+        <li><strong>এনআইডি নং:</strong> ${member.nid}</li>
+        <li><strong>মোবাইল:</strong> ${member.mobile}</li>
+        <li><strong>ঠিকানা:</strong> ${member.address}</li>
+        <li><strong>সদস্য নং:</strong> ${member.memberId}</li>
+      </ul>
+    `;
+    teamGrid.appendChild(card);
+  }
+
+  // যদি LocalStorage খালি থাকে, তাহলে ডিফল্ট ৩টি মেম্বার দেখানো হবে
+  if(teamMembers.length === 0){
+    const defaultMembers = [
+      {
+        name: "জন ডো",
+        fatherName: "রাহুল ডো",
+        motherName: "সুমা ডো",
+        nid: "1234567890",
+        mobile: "017XXXXXXXX",
+        address: "ঢাকা, বাংলাদেশ",
+        memberId: "001",
+        photo: "https://via.placeholder.com/110"
+      },
+      {
+        name: "সুমন রহমান",
+        fatherName: "আলমগীর রহমান",
+        motherName: "সালমা রহমান",
+        nid: "0987654321",
+        mobile: "018XXXXXXXX",
+        address: "চট্টগ্রাম, বাংলাদেশ",
+        memberId: "002",
+        photo: "https://via.placeholder.com/110"
+      },
+      {
+        name: "রিনা আক্তার",
+        fatherName: "মোজাম্মেল হক",
+        motherName: "শারমিন আক্তার",
+        nid: "1122334455",
+        mobile: "019XXXXXXXX",
+        address: "রাজশাহী, বাংলাদেশ",
+        memberId: "003",
+        photo: "https://via.placeholder.com/110"
+      }
+    ];
+
+    defaultMembers.forEach(addMemberCard);
+  } else {
+    // LocalStorage থেকে কার্ড দেখানো
+    teamMembers.forEach(addMemberCard);
+  }
+</script>
 
 </body>
 </html>
