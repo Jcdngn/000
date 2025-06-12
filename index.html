@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>আমাদের টিম</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       font-family: sans-serif;
@@ -58,31 +58,55 @@
   </style>
 </head>
 <body>
-  <h1>আমাদের টিম</h1>
-  <div class="team" id="teamList"></div>
 
-  <div class="admin-link">
-    <a href="admin.html">এডমিন প্যানেল খুলুন</a>
-  </div>
+<h1>আমাদের টিম</h1>
+<div class="team" id="teamList"></div>
 
-  <script>
-    const teamList = document.getElementById('teamList');
-    const members = JSON.parse(localStorage.getItem('teamMembers')) || [];
+<div class="admin-link">
+  <a href="admin.html">এডমিন প্যানেল খুলুন</a>
+</div>
 
-    if (members.length === 0) {
-      teamList.innerHTML = '<p>কোনো টিম মেম্বার নেই।</p>';
-    } else {
-      members.forEach(member => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <img src="${member.image || 'https://via.placeholder.com/100'}" alt="img">
-          <h3>${member.name}</h3>
-          <p>${member.role}</p>
-        `;
-        teamList.appendChild(card);
-      });
-    }
-  </script>
+<script>
+  // ডিফল্ট ৩ মেম্বার যদি না থাকে
+  if (!localStorage.getItem('teamMembers')) {
+    const defaultMembers = [
+      {
+        name: "জন ডো",
+        role: "ওয়েব ডিজাইনার",
+        image: "https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
+      },
+      {
+        name: "জেন স্মিথ",
+        role: "ফ্রন্টএন্ড ডেভেলপার",
+        image: "https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_02.png"
+      },
+      {
+        name: "রাহুল চক্রবর্তী",
+        role: "ব্যাকএন্ড ডেভেলপার",
+        image: "https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_03.png"
+      }
+    ];
+    localStorage.setItem('teamMembers', JSON.stringify(defaultMembers));
+  }
+
+  const teamList = document.getElementById('teamList');
+  const members = JSON.parse(localStorage.getItem('teamMembers')) || [];
+
+  if (members.length === 0) {
+    teamList.innerHTML = '<p>কোনো টিম মেম্বার নেই।</p>';
+  } else {
+    members.forEach(member => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${member.image || 'https://via.placeholder.com/100'}" alt="img" />
+        <h3>${member.name}</h3>
+        <p>${member.role}</p>
+      `;
+      teamList.appendChild(card);
+    });
+  }
+</script>
+
 </body>
 </html>
