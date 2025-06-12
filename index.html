@@ -6,7 +6,7 @@
   <title>নতুন দিগন্ত সংগঠন</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet" />
   <style>
-    /* Reset ও বেসিক স্টাইল */
+    /* আপনার মূল CSS এখানে রেখে দিয়েছি */
     * {
       box-sizing: border-box;
     }
@@ -129,7 +129,10 @@
 
 <main>
   <h2>আমাদের টিম মেম্বারগণ</h2>
-  <div class="team-grid"></div>
+
+  <div class="team-grid" id="teamGrid">
+    <!-- এখানে JS দিয়ে মেম্বার কার্ড যোগ হবে -->
+  </div>
 </main>
 
 <footer>
@@ -141,15 +144,13 @@
 </footer>
 
 <script>
-  // LocalStorage থেকে মেম্বার ডেটা নেওয়া
+  const teamGrid = document.getElementById('teamGrid');
+  // LocalStorage থেকে মেম্বার লোড
   const teamMembers = JSON.parse(localStorage.getItem('teamMembers')) || [];
 
-  const teamGrid = document.querySelector('.team-grid');
-
-  // ফাংশন: কার্ড তৈরী ও যোগ করা
-  function addMemberCard(member) {
+  function createCard(member) {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.classList.add('card');
     card.innerHTML = `
       <img src="${member.photo || 'https://via.placeholder.com/110'}" alt="সদস্যের ছবি" />
       <ul class="info-list">
@@ -162,11 +163,11 @@
         <li><strong>সদস্য নং:</strong> ${member.memberId}</li>
       </ul>
     `;
-    teamGrid.appendChild(card);
+    return card;
   }
 
-  // যদি LocalStorage খালি থাকে, তাহলে ডিফল্ট ৩টি মেম্বার দেখানো হবে
-  if(teamMembers.length === 0){
+  if (teamMembers.length === 0) {
+    // ডিফল্ট মেম্বার দেখানো
     const defaultMembers = [
       {
         name: "জন ডো",
@@ -199,11 +200,14 @@
         photo: "https://via.placeholder.com/110"
       }
     ];
-
-    defaultMembers.forEach(addMemberCard);
+    defaultMembers.forEach(member => {
+      teamGrid.appendChild(createCard(member));
+    });
   } else {
-    // LocalStorage থেকে কার্ড দেখানো
-    teamMembers.forEach(addMemberCard);
+    // LocalStorage থেকে ডাইনামিক লোড
+    teamMembers.forEach(member => {
+      teamGrid.appendChild(createCard(member));
+    });
   }
 </script>
 
