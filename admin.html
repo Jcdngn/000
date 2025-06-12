@@ -3,206 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>এডমিন প্যানেল - নতুন দিগন্ত সংগঠন</title>
+  <title>নতুন দিগন্ত সংগঠন</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet" />
   <style>
+    /* Reset ও বেসিক স্টাইল */
+    * {
+      box-sizing: border-box;
+    }
     body {
+      margin: 0;
       font-family: 'Noto Sans Bengali', sans-serif;
-      max-width: 700px;
-      margin: 30px auto;
-      padding: 0 15px;
       background-color: #f5f7f6;
-      color: #333;
+      color: #333333;
+      line-height: 1.6;
     }
-    h1 {
-      text-align: center;
+    a {
       color: #007b5e;
-      margin-bottom: 30px;
+      text-decoration: none;
+      transition: color 0.3s;
     }
-    form {
-      background: white;
-      padding: 20px;
+    a:hover {
+      color: #108d6f;
+      text-decoration: underline;
+    }
+    h1, h2, h3, h4 {
+      color: #007b5e;
+      margin-top: 0;
+    }
+
+    /* হেডার */
+    header {
+      background-color: #007b5e;
+      padding: 20px 10px;
+      text-align: center;
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+
+    /* মেইন কনটেন্ট */
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+    main h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* টিম কার্ড গ্রিড */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 25px;
+    }
+
+    /* কার্ড স্টাইল */
+    .card {
+      background: #fff;
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      margin-bottom: 40px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: #007b5e;
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
     }
-    input[type="text"], input[type="url"], input[type="tel"] {
-      width: 100%;
-      padding: 8px 10px;
-      margin-bottom: 15px;
-      border: 1.5px solid #007b5e;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-    button {
-      background-color: #007b5e;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #108d6f;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    th, td {
-      border: 1px solid #007b5e;
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: #007b5e;
-      color: white;
-    }
-    .delete-btn {
-      background-color: #d9534f;
-      border: none;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .delete-btn:hover {
-      background-color: #c9302c;
-    }
-    .photo-preview {
-      width: 50px;
-      height: 50px;
+
+    /* ছবি */
+    .card img {
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid #007b5e;
+      margin-bottom: 15px;
+      border: 3px solid #007b5e;
+    }
+
+    /* তথ্য তালিকা */
+    .info-list {
+      text-align: left;
+      color: #555555;
+      line-height: 1.4;
+      margin-top: 10px;
+      padding-left: 0;
+      list-style: none;
+    }
+    .info-list li {
+      margin-bottom: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 15px;
+    }
+    .info-list strong {
+      color: #007b5e;
+      min-width: 90px;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    /* ফুটার */
+    footer {
+      background-color: #007b5e;
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      margin-top: 60px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      box-shadow: 0 -3px 8px rgba(0,0,0,0.1);
+    }
+    footer a {
+      color: #a6e1cd;
+      text-decoration: none;
+      margin: 0 5px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #ffffff;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-<h1>এডমিন প্যানেল</h1>
+<header>
+  নতুন দিগন্ত সংগঠন
+</header>
 
-<form id="addMemberForm">
-  <label for="name">নাম</label>
-  <input type="text" id="name" required />
+<main>
+  <h2>আমাদের টিম মেম্বারগণ</h2>
+  
+  <div class="team-grid">
+    <!-- মেম্বার ১ -->
+    <div class="card">
+      <img src="https://via.placeholder.com/110" alt="সদস্যের ছবি" />
+      <ul class="info-list">
+        <li><strong>নাম:</strong> জন ডো</li>
+        <li><strong>পিতার নাম:</strong> রাহুল ডো</li>
+        <li><strong>মাতার নাম:</strong> সুমা ডো</li>
+        <li><strong>এনআইডি নং:</strong> 1234567890</li>
+        <li><strong>মোবাইল:</strong> 017XXXXXXXX</li>
+        <li><strong>ঠিকানা:</strong> ঢাকা, বাংলাদেশ</li>
+        <li><strong>সদস্য নং:</strong> 001</li>
+      </ul>
+    </div>
 
-  <label for="father">পিতার নাম</label>
-  <input type="text" id="father" required />
+    <!-- মেম্বার ২ -->
+    <div class="card">
+      <img src="https://via.placeholder.com/110" alt="সদস্যের ছবি" />
+      <ul class="info-list">
+        <li><strong>নাম:</strong> সুমন রহমান</li>
+        <li><strong>পিতার নাম:</strong> আলমগীর রহমান</li>
+        <li><strong>মাতার নাম:</strong> সালমা রহমান</li>
+        <li><strong>এনআইডি নং:</strong> 0987654321</li>
+        <li><strong>মোবাইল:</strong> 018XXXXXXXX</li>
+        <li><strong>ঠিকানা:</strong> চট্টগ্রাম, বাংলাদেশ</li>
+        <li><strong>সদস্য নং:</strong> 002</li>
+      </ul>
+    </div>
 
-  <label for="mother">মাতার নাম</label>
-  <input type="text" id="mother" required />
+    <!-- মেম্বার ৩ -->
+    <div class="card">
+      <img src="https://via.placeholder.com/110" alt="সদস্যের ছবি" />
+      <ul class="info-list">
+        <li><strong>নাম:</strong> রিনা আক্তার</li>
+        <li><strong>পিতার নাম:</strong> মোজাম্মেল হক</li>
+        <li><strong>মাতার নাম:</strong> শারমিন আক্তার</li>
+        <li><strong>এনআইডি নং:</strong> 1122334455</li>
+        <li><strong>মোবাইল:</strong> 019XXXXXXXX</li>
+        <li><strong>ঠিকানা:</strong> রাজশাহী, বাংলাদেশ</li>
+        <li><strong>সদস্য নং:</strong> 003</li>
+      </ul>
+    </div>
+  </div>
+</main>
 
-  <label for="nid">এনআইডি নং</label>
-  <input type="text" id="nid" required />
-
-  <label for="mobile">মোবাইল</label>
-  <input type="tel" id="mobile" required pattern="01[3-9][0-9]{8}" title="বাংলাদেশের মোবাইল নম্বর" />
-
-  <label for="address">ঠিকানা</label>
-  <input type="text" id="address" required />
-
-  <label for="memberId">সদস্য নং</label>
-  <input type="text" id="memberId" required />
-
-  <label for="photo">ছবি URL (ঐচ্ছিক)</label>
-  <input type="url" id="photo" placeholder="https://..." />
-
-  <button type="submit">সদস্য যোগ করুন</button>
-</form>
-
-<h2>সদস্যদের তালিকা</h2>
-<table id="membersTable">
-  <thead>
-    <tr>
-      <th>ছবি</th>
-      <th>নাম</th>
-      <th>মোবাইল</th>
-      <th>সদস্য নং</th>
-      <th>অ্যাকশন</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- সদস্যদের লিস্ট এখানে দেখানো হবে -->
-  </tbody>
-</table>
-
-<script>
-  const form = document.getElementById('addMemberForm');
-  const membersTableBody = document.querySelector('#membersTable tbody');
-
-  // লোকালস্টোরেজ থেকে ডাটা লোড
-  function loadMembers() {
-    const members = JSON.parse(localStorage.getItem('members') || '[]');
-    membersTableBody.innerHTML = '';
-    members.forEach((member, index) => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><img src="${member.photo || 'https://via.placeholder.com/50'}" alt="ছবি" class="photo-preview" /></td>
-        <td>${member.name}</td>
-        <td>${member.mobile}</td>
-        <td>${member.memberId}</td>
-        <td><button class="delete-btn" data-index="${index}">ডিলিট</button></td>
-      `;
-      membersTableBody.appendChild(tr);
-    });
-  }
-
-  // সদস্য যোগ করা
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const newMember = {
-      name: form.name.value.trim(),
-      father: form.father.value.trim(),
-      mother: form.mother.value.trim(),
-      nid: form.nid.value.trim(),
-      mobile: form.mobile.value.trim(),
-      address: form.address.value.trim(),
-      memberId: form.memberId.value.trim(),
-      photo: form.photo.value.trim()
-    };
-
-    let members = JSON.parse(localStorage.getItem('members') || '[]');
-
-    // সদস্য নং ডুপ্লিকেট চেক (ঐচ্ছিক)
-    if (members.some(m => m.memberId === newMember.memberId)) {
-      alert('এই সদস্য নম্বর ইতিমধ্যে আছে। অন্যটি ব্যবহার করুন।');
-      return;
-    }
-
-    members.push(newMember);
-    localStorage.setItem('members', JSON.stringify(members));
-
-    form.reset();
-    loadMembers();
-    alert('সদস্য সফলভাবে যোগ হয়েছে!');
-  });
-
-  // ডিলিট বাটন কাজ
-  membersTableBody.addEventListener('click', e => {
-    if (e.target.classList.contains('delete-btn')) {
-      const index = e.target.getAttribute('data-index');
-      let members = JSON.parse(localStorage.getItem('members') || '[]');
-      if (confirm('সদস্য মুছে ফেলতে চান?')) {
-        members.splice(index, 1);
-        localStorage.setItem('members', JSON.stringify(members));
-        loadMembers();
-      }
-    }
-  });
-
-  // পেজ লোড হলে সদস্যরা দেখানো
-  document.addEventListener('DOMContentLoaded', loadMembers);
-</script>
+<footer>
+  <p>&copy; ২০২৫ নতুন দিগন্ত সংগঠন. সর্বস্বত্ব সংরক্ষিত।</p>
+  <p>যোগাযোগ: +৮৮০ ১৭১১-xxxxxxx | ইমেইল: info@notundigonto.org</p>
+  <p>
+    <a href="#top">পেজের শুরুতে যান</a> | <a href="admin.html">এডমিন প্যানেল</a>
+  </p>
+</footer>
 
 </body>
 </html>
