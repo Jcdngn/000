@@ -3,199 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>নতুন দিগন্ত সংগঠন</title>
+  <title>এডমিন প্যানেল - নতুন দিগন্ত সংগঠন</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet" />
   <style>
-    /* Reset ও বেসিক স্টাইল */
-    * {
-      box-sizing: border-box;
-    }
     body {
       margin: 0;
       font-family: 'Noto Sans Bengali', sans-serif;
       background-color: #f5f7f6;
-      color: #333333;
-      line-height: 1.6;
+      color: #333;
+      padding: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      color: #007b5e;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #007b5e;
+    }
+    input[type="text"], input[type="url"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 25px;
+      padding: 12px 20px;
+      background-color: #007b5e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #005a43;
+    }
+    .message {
+      margin-top: 20px;
+      color: green;
+      font-weight: 600;
+      text-align: center;
     }
     a {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
       color: #007b5e;
       text-decoration: none;
-      transition: color 0.3s;
+      font-weight: 600;
     }
     a:hover {
-      color: #108d6f;
-      text-decoration: underline;
-    }
-    h1, h2, h3, h4 {
-      color: #007b5e;
-      margin-top: 0;
-    }
-
-    /* হেডার */
-    header {
-      background-color: #007b5e;
-      padding: 20px 10px;
-      text-align: center;
-      color: white;
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    }
-
-    /* মেইন কনটেন্ট */
-    main {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 15px;
-    }
-    main h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    /* টিম কার্ড গ্রিড */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap: 25px;
-    }
-
-    /* কার্ড স্টাইল */
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-    }
-
-    /* ছবি */
-    .card img {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-      border: 3px solid #007b5e;
-    }
-
-    /* তথ্য তালিকা */
-    .info-list {
-      text-align: left;
-      color: #555555;
-      line-height: 1.4;
-      margin-top: 10px;
-      padding-left: 0;
-      list-style: none;
-    }
-    .info-list li {
-      margin-bottom: 10px;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      font-size: 15px;
-    }
-    .info-list strong {
-      color: #007b5e;
-      min-width: 90px;
-      display: inline-block;
-      font-weight: 600;
-    }
-
-    /* ফুটার */
-    footer {
-      background-color: #007b5e;
-      color: white;
-      text-align: center;
-      padding: 15px 10px;
-      margin-top: 60px;
-      font-size: 14px;
-      letter-spacing: 1px;
-      box-shadow: 0 -3px 8px rgba(0,0,0,0.1);
-    }
-    footer a {
-      color: #a6e1cd;
-      text-decoration: none;
-      margin: 0 5px;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    footer a:hover {
-      color: #ffffff;
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-<header>
-  নতুন দিগন্ত সংগঠন
-</header>
+<h1>নতুন সদস্য যোগ করুন</h1>
 
-<main>
-  <h2>আমাদের টিম মেম্বারগণ</h2>
-  
-  <div class="team-grid">
-    <!-- মেম্বার ১ -->
-    <div class="card">
-      <img src="https://via.placeholder.com/110" alt="সদস্যের ছবি" />
-      <ul class="info-list">
-        <li><strong>নাম:</strong> জন ডো</li>
-        <li><strong>পিতার নাম:</strong> রাহুল ডো</li>
-        <li><strong>মাতার নাম:</strong> সুমা ডো</li>
-        <li><strong>এনআইডি নং:</strong> 1234567890</li>
-        <li><strong>মোবাইল:</strong> 017XXXXXXXX</li>
-        <li><strong>ঠিকানা:</strong> ঢাকা, বাংলাদেশ</li>
-        <li><strong>সদস্য নং:</strong> 001</li>
-      </ul>
-    </div>
+<form id="memberForm">
+  <label for="name">নাম</label>
+  <input type="text" id="name" required />
 
-    <!-- মেম্বার ২ -->
-    <div class="card">
-      <img src="https://via.placeholder.com/110" alt="সদস্যের ছবি" />
-      <ul class="info-list">
-        <li><strong>নাম:</strong> সুমন রহমান</li>
-        <li><strong>পিতার নাম:</strong> আলমগীর রহমান</li>
-        <li><strong>মাতার নাম:</strong> সালমা রহমান</li>
-        <li><strong>এনআইডি নং:</strong> 0987654321</li>
-        <li><strong>মোবাইল:</strong> 018XXXXXXXX</li>
-        <li><strong>ঠিকানা:</strong> চট্টগ্রাম, বাংলাদেশ</li>
-        <li><strong>সদস্য নং:</strong> 002</li>
-      </ul>
-    </div>
+  <label for="fatherName">পিতার নাম</label>
+  <input type="text" id="fatherName" required />
 
-    <!-- মেম্বার ৩ -->
-    <div class="card">
-      <img src="https://via.placeholder.com/110" alt="সদস্যের ছবি" />
-      <ul class="info-list">
-        <li><strong>নাম:</strong> রিনা আক্তার</li>
-        <li><strong>পিতার নাম:</strong> মোজাম্মেল হক</li>
-        <li><strong>মাতার নাম:</strong> শারমিন আক্তার</li>
-        <li><strong>এনআইডি নং:</strong> 1122334455</li>
-        <li><strong>মোবাইল:</strong> 019XXXXXXXX</li>
-        <li><strong>ঠিকানা:</strong> রাজশাহী, বাংলাদেশ</li>
-        <li><strong>সদস্য নং:</strong> 003</li>
-      </ul>
-    </div>
-  </div>
-</main>
+  <label for="motherName">মাতার নাম</label>
+  <input type="text" id="motherName" required />
 
-<footer>
-  <p>&copy; ২০২৫ নতুন দিগন্ত সংগঠন. সর্বস্বত্ব সংরক্ষিত।</p>
-  <p>যোগাযোগ: +৮৮০ ১৭১১-xxxxxxx | ইমেইল: info@notundigonto.org</p>
-  <p>
-    <a href="#top">পেজের শুরুতে যান</a> | <a href="admin.html">এডমিন প্যানেল</a>
-  </p>
-</footer>
+  <label for="nid">এনআইডি নং</label>
+  <input type="text" id="nid" required />
+
+  <label for="mobile">মোবাইল</label>
+  <input type="text" id="mobile" required />
+
+  <label for="address">ঠিকানা</label>
+  <input type="text" id="address" required />
+
+  <label for="memberId">সদস্য নং</label>
+  <input type="text" id="memberId" required />
+
+  <label for="photo">ছবির URL (ঐচ্ছিক)</label>
+  <input type="url" id="photo" placeholder="https://example.com/photo.jpg" />
+
+  <button type="submit">সদস্য যোগ করুন</button>
+</form>
+
+<div class="message" id="message"></div>
+
+<a href="index.html">পাবলিক পেজে যান</a>
+
+<script>
+  const form = document.getElementById('memberForm');
+  const message = document.getElementById('message');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // ফর্মের ডাটা সংগ্রহ
+    const member = {
+      name: document.getElementById('name').value.trim(),
+      fatherName: document.getElementById('fatherName').value.trim(),
+      motherName: document.getElementById('motherName').value.trim(),
+      nid: document.getElementById('nid').value.trim(),
+      mobile: document.getElementById('mobile').value.trim(),
+      address: document.getElementById('address').value.trim(),
+      memberId: document.getElementById('memberId').value.trim(),
+      photo: document.getElementById('photo').value.trim()
+    };
+
+    // LocalStorage থেকে আগের মেম্বারগণ নেওয়া
+    let members = JSON.parse(localStorage.getItem('teamMembers')) || [];
+
+    // নতুন সদস্য যোগ করা
+    members.push(member);
+
+    // LocalStorage এ সেভ করা
+    localStorage.setItem('teamMembers', JSON.stringify(members));
+
+    // ফর্ম রিসেট
+    form.reset();
+
+    // সফলতার মেসেজ দেখানো
+    message.textContent = "সদস্য সফলভাবে যোগ করা হয়েছে!";
+
+    // ৩ সেকেন্ড পরে মেসেজ মুছে ফেলুন
+    setTimeout(() => {
+      message.textContent = '';
+    }, 3000);
+  });
+</script>
 
 </body>
 </html>
