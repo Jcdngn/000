@@ -33,119 +33,165 @@
       margin-top: 5px;
       border-radius: 6px;
       border: 1px solid #ccc;
-      font-size: 16px;
+      font-size: 15px;
       box-sizing: border-box;
     }
     button {
       margin-top: 25px;
-      padding: 12px 20px;
       background-color: #007b5e;
       color: white;
       border: none;
+      padding: 12px 20px;
       border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
-      font-size: 18px;
-      width: 100%;
       transition: background-color 0.3s ease;
     }
     button:hover {
       background-color: #005a43;
     }
-    .message {
-      margin-top: 20px;
-      color: green;
-      font-weight: 600;
-      text-align: center;
+    .member-list {
+      margin-top: 40px;
+      border-top: 1px solid #007b5e;
+      padding-top: 20px;
     }
-    a {
+    .member-item {
+      background: #ffffff;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .member-info {
+      font-size: 14px;
+      color: #444;
+    }
+    .delete-btn {
+      background-color: #d9534f;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .delete-btn:hover {
+      background-color: #b52b27;
+    }
+    .back-link {
       display: block;
-      text-align: center;
       margin-top: 30px;
+      text-align: center;
       color: #007b5e;
+      font-weight: 700;
       text-decoration: none;
-      font-weight: 600;
     }
-    a:hover {
+    .back-link:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-<h1>নতুন সদস্য যোগ করুন</h1>
+  <h1>নতুন সদস্য যোগ করুন</h1>
 
-<form id="memberForm">
-  <label for="name">নাম</label>
-  <input type="text" id="name" required />
+  <form id="memberForm">
+    <label>নাম</label>
+    <input type="text" id="name" required />
+    <label>পিতার নাম</label>
+    <input type="text" id="fatherName" required />
+    <label>মাতার নাম</label>
+    <input type="text" id="motherName" required />
+    <label>এনআইডি নং</label>
+    <input type="text" id="nid" required />
+    <label>মোবাইল</label>
+    <input type="text" id="mobile" required />
+    <label>ঠিকানা</label>
+    <input type="text" id="address" required />
+    <label>সদস্য নং</label>
+    <input type="text" id="memberId" required />
+    <label>ছবি URL (ঐচ্ছিক)</label>
+    <input type="url" id="photo" placeholder="https://example.com/photo.jpg" />
+    <button type="submit">সদস্য যোগ করুন</button>
+  </form>
 
-  <label for="fatherName">পিতার নাম</label>
-  <input type="text" id="fatherName" required />
+  <div class="member-list" id="memberList">
+    <!-- মেম্বার লিস্ট এখানে দেখানো হবে -->
+  </div>
 
-  <label for="motherName">মাতার নাম</label>
-  <input type="text" id="motherName" required />
+  <a class="back-link" href="index.html">⟵ হোম পেজে ফিরে যান</a>
 
-  <label for="nid">এনআইডি নং</label>
-  <input type="text" id="nid" required />
+  <script>
+    const memberForm = document.getElementById('memberForm');
+    const memberList = document.getElementById('memberList');
 
-  <label for="mobile">মোবাইল</label>
-  <input type="text" id="mobile" required />
+    let teamMembers = JSON.parse(localStorage.getItem('teamMembers')) || [];
 
-  <label for="address">ঠিকানা</label>
-  <input type="text" id="address" required />
+    function saveMembers() {
+      localStorage.setItem('teamMembers', JSON.stringify(teamMembers));
+    }
 
-  <label for="memberId">সদস্য নং</label>
-  <input type="text" id="memberId" required />
+    function renderMembers() {
+      memberList.innerHTML = '';
+      if (teamMembers.length === 0) {
+        memberList.innerHTML = '<p>কোনো সদস্য পাওয়া যায়নি।</p>';
+        return;
+      }
+      teamMembers.forEach((member, index) => {
+        const div = document.createElement('div');
+        div.classList.add('member-item');
+        div.innerHTML = `
+          <div class="member-info">
+            <strong>${member.name}</strong> (সদস্য নং: ${member.memberId})<br />
+            মোবাইল: ${member.mobile}<br />
+            ঠিকানা: ${member.address}
+          </div>
+          <button class="delete-btn" data-index="${index}">মুছে ফেলুন</button>
+        `;
+        memberList.appendChild(div);
+      });
 
-  <label for="photo">ছবির URL (ঐচ্ছিক)</label>
-  <input type="url" id="photo" placeholder="https://example.com/photo.jpg" />
+      // ডিলিট বাটনে ইভেন্ট লিস্টনার যোগ করা
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = e.target.getAttribute('data-index');
+          if (confirm('আপনি কি নিশ্চিত মেম্বার মুছে ফেলতে চান?')) {
+            teamMembers.splice(idx, 1);
+            saveMembers();
+            renderMembers();
+          }
+        });
+      });
+    }
 
-  <button type="submit">সদস্য যোগ করুন</button>
-</form>
+    memberForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const newMember = {
+        name: document.getElementById('name').value.trim(),
+        fatherName: document.getElementById('fatherName').value.trim(),
+        motherName: document.getElementById('motherName').value.trim(),
+        nid: document.getElementById('nid').value.trim(),
+        mobile: document.getElementById('mobile').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        memberId: document.getElementById('memberId').value.trim(),
+        photo: document.getElementById('photo').value.trim() || 'https://via.placeholder.com/110'
+      };
 
-<div class="message" id="message"></div>
+      // এখানে আপনি চাইলে বেশি ভ্যালিডেশন যোগ করতে পারেন
 
-<a href="index.html">পাবলিক পেজে যান</a>
+      teamMembers.push(newMember);
+      saveMembers();
+      renderMembers();
+      memberForm.reset();
+      alert('সদস্য সফলভাবে যোগ করা হয়েছে!');
+    });
 
-<script>
-  const form = document.getElementById('memberForm');
-  const message = document.getElementById('message');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    // ফর্মের ডাটা সংগ্রহ
-    const member = {
-      name: document.getElementById('name').value.trim(),
-      fatherName: document.getElementById('fatherName').value.trim(),
-      motherName: document.getElementById('motherName').value.trim(),
-      nid: document.getElementById('nid').value.trim(),
-      mobile: document.getElementById('mobile').value.trim(),
-      address: document.getElementById('address').value.trim(),
-      memberId: document.getElementById('memberId').value.trim(),
-      photo: document.getElementById('photo').value.trim()
-    };
-
-    // LocalStorage থেকে আগের মেম্বারগণ নেওয়া
-    let members = JSON.parse(localStorage.getItem('teamMembers')) || [];
-
-    // নতুন সদস্য যোগ করা
-    members.push(member);
-
-    // LocalStorage এ সেভ করা
-    localStorage.setItem('teamMembers', JSON.stringify(members));
-
-    // ফর্ম রিসেট
-    form.reset();
-
-    // সফলতার মেসেজ দেখানো
-    message.textContent = "সদস্য সফলভাবে যোগ করা হয়েছে!";
-
-    // ৩ সেকেন্ড পরে মেসেজ মুছে ফেলুন
-    setTimeout(() => {
-      message.textContent = '';
-    }, 3000);
-  });
-</script>
+    // প্রথমে লোডের সময় রেন্ডার করুন
+    renderMembers();
+  </script>
 
 </body>
 </html>
