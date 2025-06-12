@@ -166,44 +166,7 @@
     return card;
   }
 
-  if (teamMembers.length === 0) {
-    // ডিফল্ট মেম্বার দেখানো
-    const defaultMembers = [
-      {
-        name: "জন ডো",
-        fatherName: "রাহুল ডো",
-        motherName: "সুমা ডো",
-        nid: "1234567890",
-        mobile: "017XXXXXXXX",
-        address: "ঢাকা, বাংলাদেশ",
-        memberId: "001",
-        photo: "https://via.placeholder.com/110"
-      },
-      {
-        name: "সুমন রহমান",
-        fatherName: "আলমগীর রহমান",
-        motherName: "সালমা রহমান",
-        nid: "0987654321",
-        mobile: "018XXXXXXXX",
-        address: "চট্টগ্রাম, বাংলাদেশ",
-        memberId: "002",
-        photo: "https://via.placeholder.com/110"
-      },
-      {
-        name: "রিনা আক্তার",
-        fatherName: "মোজাম্মেল হক",
-        motherName: "শারমিন আক্তার",
-        nid: "1122334455",
-        mobile: "019XXXXXXXX",
-        address: "রাজশাহী, বাংলাদেশ",
-        memberId: "003",
-        photo: "https://via.placeholder.com/110"
-      }
-    ];
-    defaultMembers.forEach(member => {
-      teamGrid.appendChild(createCard(member));
-    });
-  } else {
+  
     // LocalStorage থেকে ডাইনামিক লোড
     teamMembers.forEach(member => {
       teamGrid.appendChild(createCard(member));
