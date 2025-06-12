@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>নতুন দিগন্ত সংগঠন</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet" />
+  <style>
+    /* (আপনার আগের CSS এখানে থাকবে) */
+    /* ... আগের CSS ... */
+  </style>
+</head>
+<body>
+
+<header id="top">
+  নতুন দিগন্ত সংগঠন
+</header>
+
+<main>
+  <h2>আমাদের টিম মেম্বারগণ</h2>
+  
+  <div class="team-grid" id="teamGrid">
+    <!-- সদস্যদের কার্ডগুলো এখানে JS দিয়ে যোগ হবে -->
+  </div>
+</main>
+
+<footer>
+  <p>&copy; ২০২৫ নতুন দিগন্ত সংগঠন. সর্বস্বত্ব সংরক্ষিত।</p>
+  <p>যোগাযোগ: +৮৮০ ১৭১১-xxxxxxx | ইমেইল: info@notundigonto.org</p>
+  <p>
+    <a href="#top">পেজের শুরুতে যান</a> | <a href="admin.html">এডমিন প্যানেল</a>
+  </p>
+</footer>
+
+<script>
+  // লোকালস্টোরেজ থেকে সদস্যদের তালিকা নিয়ে এসে HTML তৈরি করে দেখানো
+  function loadMembers() {
+    const teamGrid = document.getElementById('teamGrid');
+    teamGrid.innerHTML = '';
+    const members = JSON.parse(localStorage.getItem('members') || '[]');
+
+    if (members.length === 0) {
+      teamGrid.innerHTML = '<p>কোনো সদস্য নেই। এডমিন প্যানেলে গিয়ে সদস্য যোগ করুন।</p>';
+      return;
+    }
+
+    members.forEach(member => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${member.photo || 'https://via.placeholder.com/110'}" alt="সদস্যের ছবি" loading="lazy" />
+        <ul class="info-list">
+          <li><strong>নাম:</strong> ${member.name}</li>
+          <li><strong>পিতার নাম:</strong> ${member.father}</li>
+          <li><strong>মাতার নাম:</strong> ${member.mother}</li>
+          <li><strong>এনআইডি নং:</strong> ${member.nid}</li>
+          <li><strong>মোবাইল:</strong> ${member.mobile}</li>
+          <li><strong>ঠিকানা:</strong> ${member.address}</li>
+          <li><strong>সদস্য নং:</strong> ${member.memberId}</li>
+        </ul>
+      `;
+      teamGrid.appendChild(card);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', loadMembers);
+</script>
+
+</body>
+</html>
